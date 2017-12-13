@@ -2,42 +2,26 @@ import argparse
 import os
 import subprocess
 
-content = r'''
-\documentclass{article}
-\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
-\usepackage{tabularx}
-\begin{document}
-
-\begin{tabularx}{\textwidth}{X|l}
-  \textbf{Symptom} & \textbf{Metric} \\
-\hline
-Class that has many accessor methods and accesses a lot of external data & ATFD is more than a few\\
-Class that is large and complex & WMC is high\\
-Class that has a lot of methods that only operate on a proper subset of the instance variable set & TCC is low\\
-\end{tabularx}
-
-\textbf{\huge %(school)s \\}
-
-\textbf{\Large %(title)s \\}
-
-\end{document}
-'''
-
 content1 = r'''
-\documentclass{article}
+\documentclass{ctexart}
+ 
 \usepackage[a4paper,top=3cm,bottom=2cm,left=1.5cm,right=1.5cm,marginparwidth=1.5cm]{geometry}
-\usepackage{tabularx}
-\usepackage{enumitem}
-\renewcommand{\labelenumii}{\Roman{enumii}}
-\renewcommand{\labelenumii}{\theenumii}
-\renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
 
+\usepackage{tabularx}
+\usepackage{lastpage}
+\usepackage{enumitem}
 
 \newcolumntype{b}{X}
 \newcolumntype{s}{>{\hsize=.5\hsize}X}
-\title{Your Paper}
+
 \begin{document}
-\maketitle
+
+\begin{center}
+    \LARGE\bf
+    M\textsc{emorandum}
+\end{center}
+
+
 \begin{table}[htbp]
     \centering
     \begin{tabularx}{\textwidth}{| s | s | s | s |}
@@ -48,46 +32,32 @@ content1 = r'''
     \end{tabularx}
 \end{table}
 
-\begin{enumerate}
-  \item First
+\begin{enumerate}[label*=\arabic*.]
+  \item \textbf{\underline{First}}
   \begin{enumerate}[label*=\arabic*.]
     \item Second
     \item Third
-  \end{enumerate}
-  \item Fourth
-\end{enumerate}
-
-\begin{enumerate}
-  \item First
-  \begin{enumerate}
-    \item Second
-    \item Third
-    \begin{enumerate}
+    \begin{enumerate}[label*=\arabic*.]
         \item Second
-    
         \item Third
     \end{enumerate}
   \end{enumerate}
   \item Fourth
 \end{enumerate}
 
+\begin{enumerate}[label*=\arabic*.]
+  \item \textbf{\underline{鍾文}}
+  \begin{enumerate}[label*=\arabic*.]
+    \item Second
+    \item Third
+    \begin{enumerate}[label*=\arabic*.]
+        \item Second
+        \item Third
+    \end{enumerate}
+  \end{enumerate}
+  \item Fourth
+\end{enumerate}
 
- \begin{enumerate}
-   \item First level item
-   \item First level item
-   \begin{enumerate}
-     \item Second level item
-     \item Second level item
-       \begin{enumerate}
-       \item Third level item
-       \item Third level item
-         \begin{enumerate}
-         \item Fourth level item
-         \item Fourth level item
-       \end{enumerate}
-     \end{enumerate}
-   \end{enumerate}
- \end{enumerate}
 
 \end{document}'''
 
@@ -149,7 +119,8 @@ args = parser.parse_args()
 with open('cover.tex', 'w') as f:
     f.write(content1 % args.__dict__)
 
-cmd = ['pdflatex', '-interaction', 'nonstopmode', 'cover.tex']
+cmd = ['xelatex', '-interaction', 'nonstopmode', 'cover.tex']
+# cmd = ['pdflatex', '-interaction', 'nonstopmode', 'cover.tex']
 sub_pro = subprocess.Popen(cmd)
 sub_pro.communicate()
 
