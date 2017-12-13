@@ -98,6 +98,7 @@ if not ret_code == 0:
     raise ValueError(
         'Error {} executing command: {}'.format(ret_code, ' '.join(cmd)))
 
+# use xelatex instead of pdflatex for accommodating chinese characters
 cmd = ['xelatex', '-interaction', 'nonstopmode', 'cover.tex']
 # cmd = ['pdflatex', '-interaction', 'nonstopmode', 'cover.tex']
 sub_pro = subprocess.Popen(cmd)
@@ -112,3 +113,4 @@ if not ret_code == 0:
 os.unlink('cover.tex')
 os.unlink('cover.log')
 os.unlink('cover.aux')
+os.unlink('missfont.log')
