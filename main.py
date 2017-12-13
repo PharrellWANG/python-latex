@@ -9,21 +9,23 @@ content1 = r'''
 
 \usepackage{tabularx}
 \usepackage{enumitem}
-
-\usepackage{lastpage}
+\usepackage{contour}
 \usepackage{lastpage}
 \usepackage{fancyhdr}
+\usepackage{fancyvrb}
 \pagestyle{fancy} 
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[L]{\textit{KEY TERMS OF PERSONAL LOAN AGREEMENT}}
+\fancyfoot[R]{Page \thepage\ of \pageref{LastPage}}
 
-\cfoot{\thepage\ of \pageref{LastPage}}
 \newcolumntype{b}{X}
 \newcolumntype{s}{>{\hsize=.5\hsize}X}
 
 \begin{document}
 
 \begin{center}
-    \LARGE\bf
-    M\textsc{emorandum}
+\textsc{\large Key Terms of Personal Loan Agreement}
 \end{center}
 
 
@@ -31,38 +33,46 @@ content1 = r'''
     \centering
     \begin{tabularx}{\textwidth}{| s | s | s | s |}
         \hline
-        \multicolumn{2}{| l |}{Alpha}     & Beta     & Gamma     \\ \hline
+        \multicolumn{2}{| l |}{%(school)s}     & %(title)s     & Gamma \\ \hline
         1  & 0         & 2        & 4         \\ \hline
         3  & 1         & 3        & 5         \\ \hline
     \end{tabularx}
 \end{table}
 
-\begin{enumerate}[label*=\arabic*.]
-  \item \textbf{\underline{First}}
-  \begin{enumerate}[label*=\arabic*.]
-    \item Second
-    \item Third
+\begingroup
+    \fontsize{7.5pt}{7.5pt}\selectfont
     \begin{enumerate}[label*=\arabic*.]
+      \item \textbf{\underline{First}}
+      \begin{enumerate}[label*=\arabic*.]
         \item Second
         \item Third
+        \begin{enumerate}[label*=\arabic*.]
+            \item Second
+            \item Third
+        \end{enumerate}
+      \end{enumerate}
+      \item Fourth
     \end{enumerate}
-  \end{enumerate}
-  \item Fourth
-\end{enumerate}
-
-\begin{enumerate}[label*=\arabic*.]
-  \item \textbf{\underline{鍾文}}
-  \begin{enumerate}[label*=\arabic*.]
-    \item Second
-    \item Third
     \begin{enumerate}[label*=\arabic*.]
-        \item Second
-        \item Third
+      \item \textbf{\underline{鍾文}}
+      \begin{enumerate}[label*=\arabic*.]
+        \item 哈哈
+        \item 做麼耶
+        \begin{enumerate}[label*=\arabic*.]
+            \item 把它拿出來
+            \item 揭貸款
+        \end{enumerate}
+      \end{enumerate}
+      \item 還錢
     \end{enumerate}
-  \end{enumerate}
-  \item Fourth
-\end{enumerate}
+\endgroup
 
+\begingroup
+    \fontsize{8pt}{8pt}\selectfont
+    \begin{verbatim}  
+        how to set font size here to 10 px ?  
+    \end{verbatim}  
+\endgroup
 
 \end{document}'''
 
